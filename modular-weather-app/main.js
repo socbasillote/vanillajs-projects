@@ -1,5 +1,6 @@
-import { getWeather } from "./weather/api.js";
-import { renderWeather } from "./weather/dom.js";
+import { getWeather, getForecast } from "./weather/api.js";
+import { renderWeather, renderForecast } from "./weather/dom.js";
+
 
 const btn = document.getElementById('get-weather');
 const input = document.getElementById('city-input');
@@ -13,16 +14,16 @@ const celsiusBtn = document.getElementById("celsius-btn");
 const fahrenheitBtn = document.getElementById("fahrenheit-btn");
 
 celsiusBtn.addEventListener("click", () => {
-    currentUnit = "metric";
-    celsiusBtn.classList.add("active");
-    fahrenheitBtn.classList.remove("active");
-})
+  currentUnit = "metric";
+  celsiusBtn.classList.add("active");
+  fahrenheitBtn.classList.remove("active");
+});
 
 fahrenheitBtn.addEventListener("click", () => {
-    currentUnit = "imperial";
-    fahrenheitBtn.classList.add("active");
-    celsiusBtn.classList.remove("acitve");
-})
+  currentUnit = "imperial";
+  fahrenheitBtn.classList.add("active");
+  celsiusBtn.classList.remove("active");
+});
 
 function saveToHistory(city) {
     let history = JSON.parse(localStorage.getItem(historyKey)) || [];
@@ -51,7 +52,9 @@ btn.addEventListener('click', async () => {
     const city = input.value.trim();
     if (city) {
         const data = await getWeather(city, currentUnit);
-        renderWeather(data);
+        const forecast = await getForecast(city);
+        renderWeather(data, currentUnit);
+        renderForecast(forecast);
         saveToHistory(city);
     }
 })
