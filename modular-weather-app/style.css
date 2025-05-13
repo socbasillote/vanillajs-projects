@@ -1,0 +1,80 @@
+body {
+    font-family: sans-serif;
+    background: #f0f2f5;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+input, button {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+
+#error {
+    color: red;
+}
+
+#search-history {
+  margin-top: 2rem;
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 300px;
+}
+
+#search-history h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+#history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-item {
+  padding: 0.5rem;
+  margin-bottom: 0.25rem;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.history-item:hover {
+  background: #e0e0e0;
+}
+
+
+#unit-toggle {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+#unit-toggle button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#unit-toggle .active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
