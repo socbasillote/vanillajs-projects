@@ -1,9 +1,14 @@
-const KEY = "todos";
+// storage.js
+import { getCurrentUser, loadTodosForUser, saveTodosForUser } from './auth.js';
 
 export function saveTodos(todos) {
-    localStorage.setItem(KEY, JSON.stringify(todos));
+  const user = getCurrentUser();
+  if (user) {
+    saveTodosForUser(user, todos);
+  }
 }
 
 export function loadTodos() {
-    return JSON.parse(localStorage.getItem(KEY) || []);
+  const user = getCurrentUser();
+  return user ? loadTodosForUser(user) : [];
 }

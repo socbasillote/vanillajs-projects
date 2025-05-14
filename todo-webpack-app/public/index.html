@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi-User Todo App</title>
+  <link rel="stylesheet" href="../src/style.css" />
 </head>
 <body>
-    <div id="app">My Todo List</div>
-
-    <div>
-        <input type="text" id="todo-input" placeholder="Add a new task">
-    <button id="add-btn">Add</button>
+  <div id="auth-section">
+    <div id="signup">
+      <h2>Sign Up</h2>
+      <input type="text" id="signup-username" placeholder="Username" />
+      <input type="password" id="signup-password" placeholder="Password" />
+      <button id="signup-btn">Sign Up</button>
     </div>
-    
+
+    <div id="login">
+      <h2>Login</h2>
+      <input type="text" id="login-username" placeholder="Username" />
+      <input type="password" id="login-password" placeholder="Password" />
+      <button id="login-btn">Login</button>
+    </div>
+  </div>
+
+  <div id="todo-app" class="hidden">
+    <header>
+      <h1>Todo List</h1>
+      <button id="logout-btn">Logout</button>
+      <button id="theme-toggle">🌓</button>
+    </header>
+
+    <input id="todo-input" placeholder="Enter a task..." />
+    <button id="add-btn">Add</button>
     <ul id="todo-list"></ul>
-    
-    <!-- Webpack will inject the JS file here -->
-     <script></script>
+
+    <div id="filters">
+      <button data-filter="all">All</button>
+      <button data-filter="active">Active</button>
+      <button data-filter="completed">Completed</button>
+    </div>
+
+    <button id="clear-btn">Clear All</button>
+  </div>
+
+  <script type="module" src="../src/index.js"></script>
 </body>
 </html>
