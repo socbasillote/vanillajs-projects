@@ -1,37 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multi-User Todo App</title>
-  <link rel="stylesheet" href="../src/style.css" />
-</head>
 <body>
-  <div id="auth-section">
-    <div id="signup">
-      <h2>Sign Up</h2>
-      <input type="text" id="signup-username" placeholder="Username" />
-      <input type="password" id="signup-password" placeholder="Password" />
-      <button id="signup-btn">Sign Up</button>
-    </div>
 
-    <div id="login">
-      <h2>Login</h2>
-      <input type="text" id="login-username" placeholder="Username" />
-      <input type="password" id="login-password" placeholder="Password" />
-      <button id="login-btn">Login</button>
-    </div>
+  <!-- Signup Form -->
+  <div id="signup-section">
+    <h2>Sign Up</h2>
+    <input type="text" id="signup-username" placeholder="Username" />
+    <input type="password" id="signup-password" placeholder="Password" />
+    <button id="signup-btn">Sign Up</button>
+    <p>Already have an account? <a href="#" id="to-login">Login here</a></p>
   </div>
 
-  <div id="todo-app" class="hidden">
-    <header>
-      <h1>Todo List</h1>
+  <!-- Login Form -->
+  <div id="login-section" style="display: none;">
+    <h2>Login</h2>
+    <input type="text" id="login-username" placeholder="Username" />
+    <input type="password" id="login-password" placeholder="Password" />
+    <button id="login-btn">Login</button>
+    <p>Don't have an account? <a href="#" id="to-signup">Sign up here</a></p>
+  </div>
+
+  <!-- Todo UI -->
+  <div id="todo-section" style="display: none;">
+    <button id="logout-btn">Logout</button>
+    <h1>Todo List</h1>
+    <!-- rest of todo HTML here... -->
+  </div>
+
+
+  <!-- Todo App -->
+  <section id="todo-app" class="hidden">
+    <div>
       <button id="logout-btn">Logout</button>
       <button id="theme-toggle">🌓</button>
-    </header>
+    </div>
 
-    <input id="todo-input" placeholder="Enter a task..." />
+    <h2>Todo List</h2>
+    <input type="text" id="todo-input" placeholder="Enter a task...">
     <button id="add-btn">Add</button>
+
     <ul id="todo-list"></ul>
 
     <div id="filters">
@@ -41,8 +46,6 @@
     </div>
 
     <button id="clear-btn">Clear All</button>
-  </div>
+  </section>
 
-  <script type="module" src="../src/index.js"></script>
 </body>
-</html>

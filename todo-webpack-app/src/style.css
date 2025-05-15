@@ -162,3 +162,7 @@ li {
   transform: scale(0.95);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+.hidden {
+  display: none;
+}

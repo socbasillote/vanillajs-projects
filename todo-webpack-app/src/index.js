@@ -1,58 +1,75 @@
-// index.js
-import { setupDOM } from './dom.js';
-import { setupThemeToggle } from './dom.js';
-import { getCurrentUser, login, signup, logout } from './auth.js';
+// src/index.js
+import './style.css';
+
+import { setupDOM, setupThemeToggle } from './dom.js';
+import { signup, login, logout, getCurrentUser } from './auth.js';
+import { loadTodos, saveTodos } from './storage.js';
 import { setTodos } from './logic.js';
-import { loadTodosForUser } from './auth.js';
 
+// UI Elements
 const authSection = document.getElementById('auth-section');
-const appSection = document.getElementById('app-section');
+const todoApp = document.getElementById('todo-app');
 
-function showApp() {
-  authSection.style.display = 'none';
-  appSection.style.display = 'block';
+const loginBtn = document.getElementById('login-btn');
+const signupBtn = document.getElementById('signup-btn');
+const logoutBtn = document.getElementById('logout-btn');
+
+const signupUsername = document.getElementById('signup-username');
+const signupPassword = document.getElementById('signup-password');
+const loginUsername = document.getElementById('login-username');
+const loginPassword = document.getElementById('login-password');
+
+function showTodoApp() {
+  authSection.classList.add('hidden');
+  todoApp.classList.remove('hidden');
   setupThemeToggle();
   setupDOM();
 }
 
 function showAuth() {
-  authSection.style.display = 'block';
-  appSection.style.display = 'none';
+  authSection.classList.remove('hidden');
+  todoApp.classList.add('hidden');
 }
 
-// Auth Events
-document.getElementById('login-btn').addEventListener('click', () => {
-  const username = document.getElementById('auth-username').value.trim();
-  if (username && login(username)) {
-    const userTodos = loadTodosForUser(username);
-    setTodos(userTodos);
-    showApp();
-  } else {
-    alert('User not found.');
-  }
-});
-
-document.getElementById('signup-btn').addEventListener('click', () => {
-  const username = document.getElementById('auth-username').value.trim();
-  if (username && signup(username)) {
-    setTodos([]); // new user starts with no todos
-    showApp();
-  } else {
-    alert('Username already exists.');
-  }
-});
-
-document.getElementById('logout-btn').addEventListener('click', () => {
-  logout();
-  showAuth();
-});
-
-// Load current session
-const user = getCurrentUser();
-if (user) {
-  const userTodos = loadTodosForUser(user);
-  setTodos(userTodos);
-  showApp();
+// Load correct view
+const currentUser = getCurrentUser();
+if (currentUser) {
+  setTodos(loadTodos()); // Load user's todos
+  showTodoApp();
 } else {
   showAuth();
 }
+
+// Signup logic
+signupBtn.addEventListener('click', () => {
+  const user = signupUsername.value.trim();
+  const pass = signupPassword.value.trim();
+  if (user && pass) {
+    if (signup(user, pass)) {
+      setTodos([]); // start with empty todos
+      showTodoApp();
+    } else {
+      alert('Username already exists');
+    }
+  }
+});
+
+// Login logic
+loginBtn.addEventListener('click', () => {
+  const user = loginUsername.value.trim();
+  const pass = loginPassword.value.trim();
+  if (user && pass) {
+    if (login(user, pass)) {
+      setTodos(loadTodos());
+      showTodoApp();
+    } else {
+      alert('Invalid username or password');
+    }
+  }
+});
+
+// Logout logic
+logoutBtn.addEventListener('click', () => {
+  logout();
+  showAuth();
+});
